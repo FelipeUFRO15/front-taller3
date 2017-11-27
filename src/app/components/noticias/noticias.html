@@ -1,0 +1,32 @@
+<div layout="row" layout-align="center start">
+  <h1>Noticias</h1>
+</div>
+
+<div layout layout-wrap>
+  <md-card md-colors="{background: 'yellow-700'}" flex="30" flex-xs="100" ng-repeat="noticia in vm.noticias">
+    <md-card-header>
+      <md-card-header-text>
+        <span class="md-title">Por {{ noticia.usuario.nombre }}</span>
+        <span class="md-subhead">{{ noticia.usuario.email }}</span>
+      </md-card-header-text>
+    </md-card-header>
+    
+    <img ng-src="{{ noticia.imagen }}" class="md-card-image" alt="Washed Out">
+
+    <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{ noticia.titular }}</span>
+          <span class="md-subhead">Noticias de {{ noticia.categoria.descripcion }}</span>
+        </md-card-title-text>
+    </md-card-title>
+
+    <md-card-content>
+      <p>{{ noticia.entrada }}</p>
+    </md-card-content>
+
+    <md-card-actions layout="row" layout-align="start center">
+      <md-button class="md-raised" ng-click="vm.leer()">Leer noticia</md-button>
+    </md-card-actions>
+  </md-card>
+
+</div>

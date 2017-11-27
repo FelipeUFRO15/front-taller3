@@ -1,0 +1,21 @@
+<div layout="row" layout-align="center start">
+  <h1>Login Revista deportes</h1>
+</div>
+
+<div flex-gt-md="50" flex-offset-gt-md="25" flex-xs="90" flex-offset-xs="5">
+	<form ng-submit="vm.login(vm.credentials)">
+		<div layout="column">
+		<md-input-container class="md-icon-float md-block" flex="50">
+				<label>Email</label>
+				<input ng-model="vm.credentials.email" type="text" required>
+			</md-input-container>	
+
+			<md-input-container class="md-icon-float md-block" flex>
+				<label>Contraseña</label>
+				<input ng-model="vm.credentials.password" type="password" required>
+			</md-input-container>	
+			<span ng-if="vm.loginError" style="color: red">Credenciales erroneas</span>
+		<md-button type="submit" class="md-raised" md-colors="{background: 'red-900'}" flex>Entrar</md-button>
+	</div>
+	</form>
+</div>

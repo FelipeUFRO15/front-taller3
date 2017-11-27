@@ -1,0 +1,12 @@
+<md-toolbar md-colors="{background: 'purple-900'}" class="md-hue-2">
+  <div class="md-toolbar-tools">
+    <h2 ui-sref="app" flex md-truncate>Revista de deportes</h2>
+    <span flex></span>
+    <md-button ng-if="!vm.isLogged" ui-sref="login">
+      Iniciar Sesión
+    </md-button>
+    <md-button ng-if="vm.isLogged" ng-click="vm.logout()">
+      Cerrar Sesión
+    </md-button>
+  </div>
+</md-toolbar>
