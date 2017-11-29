@@ -19,29 +19,56 @@
     vm.status = '  ';
     vm.customFullscreen = false;
     vm.answer = '';
+    //vm.dialog = dialog;
+    vm.prueba = 'prueba';
     
     NoticiasService.query().$promise.then(function (data) {
       vm.noticias = data;
     });
 
-    vm.leer = function() {
+    vm.leer = function($event, noticia) {
       $mdDialog.show({
-        controller: DialogController,
+        templateUrl: 'app/components/dialog/dialog.html',
+        controller: dialogCtrl,
         controllerAs: 'vm',
-        templateUrl: 'App/components/dialog/dialog.html',
         parent: angular.element(document.body),
-        clickOutsideToClose: true,
+        targetEvent: $event,
+        clickOutsideToClose:true,
+        locals: {
+          noticia: noticia,
+        },
         fullscreen: vm.customFullscreen // Only for -xs, -sm breakpoints.
       })
       .then(function(answer) {
         vm.status = 'You said the information was "' + answer + '".';
       }, function() {
         vm.status = 'You cancelled the dialog.';
-    });
+      });
+    
 
-    function DialogController($mdDialog) {
+    function dialogCtrl($mdDialog, noticia) {
       var vm = this;
       vm.texto = 'funciona';
+      vm.noticia = noticia;
+      vm.color = '';
+
+      switch (vm.noticia.categoria.descripcion) {
+        case 'fútbol':
+          vm.color = 'red';
+          break;
+        case 'básquetbol':
+          vm.color = 'orange';
+          break;
+        case 'voleibol':
+          vm.color = 'lightblue';
+          break;
+        case 'tenis':
+          vm.color = 'green';
+          break;
+        case 'automovilismo':
+          vm.color = 'gray';
+          break;
+      }
 
       vm.hide = function() {
         $mdDialog.hide();
@@ -54,8 +81,7 @@
       vm.answer = function(answer) {
         $mdDialog.hide(answer);
       };
-  }
-  };
-
+    }
+};
   }
 })();

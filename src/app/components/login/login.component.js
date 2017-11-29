@@ -21,7 +21,7 @@
         CredentialsService.setToken(data.token);
         CredentialsService.setUser(data.email);
         $rootScope.$emit('isLogin');
-        $state.go('peliculas');
+        $state.go('noticias');
       }, function (error) {
         console.log(error);
       });

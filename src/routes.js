@@ -38,7 +38,7 @@ function middlewareConfig($state, CredentialsService, $transitions) {
     }
 
     if (to === 'login' && CredentialsService.isLogged()){
-      $state.go('app');
+      $state.go('noticias');
     }
   });
 }
