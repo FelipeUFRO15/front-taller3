@@ -34,6 +34,7 @@
         clickOutsideToClose:true,
         locals: {
           noticia: noticia,
+          NoticiasService: NoticiasService,
         },
         fullscreen: vm.customFullscreen // Only for -xs, -sm breakpoints.
       })
@@ -44,7 +45,7 @@
       });
     
 
-      function dialogCtrl($mdDialog, noticia) {
+      function dialogCtrl($mdDialog, noticia, NoticiasService) {
         var vm = this;
         vm.noticia = noticia;
         vm.color = '';
@@ -65,6 +66,10 @@
           case 'automovilismo':
             vm.color = 'gray';
             break;
+        }
+
+        vm.eliminar = function() {
+          NoticiasService.delete({id: vm.noticia.id});
         }
 
         vm.cancel = function() {
@@ -95,20 +100,12 @@
 
       function dialogCtrl($mdDialog, NoticiasService) {
         var vm = this;
-        /**vm.noticia = {
-          titular: '',
-          entrada: '',
-          cuerpo: '',
-          imagen: '',
-          fecha: '',
-          categoria: 0,
-          usuario: 0,
-        };*/
 
         vm.agregar = function (noticia) {
           //var fechaReal = noticia.fecha.getFullYear() + '-' + (noticia.fecha.getMonth() + 1) + '-' + noticia.fecha.getDay();
           //console.log('Fecha real: ' + fechaReal);
           //noticia.fecha = '2017-11-29';
+          console.log(noticia);
           NoticiasService.save(noticia);
         }
 
