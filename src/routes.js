@@ -20,8 +20,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider, $ht
     isPrivate: false
   })
   .state('noticias', {
-    url: '/noticias',
+    url: '/noticias/:id',
     component: 'noticias',
+    isPrivate: true
+  })
+  .state('noticia-id', {
+    url: '/noticias/:id',
     isPrivate: true
   });
 

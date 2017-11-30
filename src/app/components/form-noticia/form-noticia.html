@@ -1,0 +1,73 @@
+<md-dialog aria-label="{{ vm.noticia.titular }}">
+  <form ng-cloak>
+    <md-toolbar style="background-color: lightblue">
+      <div class="md-toolbar-tools" >
+        <h2>Agregar noticia</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="vm.cancel()">
+          <md-icon md-svg-src="assets/icons/letter-x.svg" aria-label="Cerrar"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <form name="agregar">
+        <div class="md-dialog-content">
+          <center><h2>FORMULARIO DE INGRESO DE NOTICIAS</h2></center>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Titular</label>
+              <input ng-model="vm.noticia.titular">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>URL de Imagen</label>
+              <input ng-model="vm.noticia.imagen">
+            </md-input-container>
+          </div>
+
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Entrada</label>
+              <textarea rows="2" ng-model="vm.noticia.entrada"></textarea>
+            </md-input-container>
+          </div>
+
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Cuerpo de la noticia</label>
+              <textarea rows="4" ng-model="vm.noticia.cuerpo"></textarea>
+            </md-input-container>
+          </div>
+
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Categoría</label>
+              <input ng-model="vm.noticia.categoria">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Autor</label>
+              <input ng-model="vm.noticia.autor">
+            </md-input-container>
+          </div>
+
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Fecha</label>
+              <input ng-model="vm.noticia.fecha"></md-datepicker>
+            </md-input-container>
+          </div>
+        </div>
+      </form>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="vm.agregar(vm.noticia)">
+        Agregar noticia
+      </md-button>
+      <span flex></span>
+      <md-button ng-click="vm.cancel()">
+       Cancelar
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

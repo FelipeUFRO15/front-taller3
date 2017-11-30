@@ -19,8 +19,6 @@
     vm.status = '  ';
     vm.customFullscreen = false;
     vm.answer = '';
-    //vm.dialog = dialog;
-    vm.prueba = 'prueba';
     
     NoticiasService.query().$promise.then(function (data) {
       vm.noticias = data;
@@ -46,42 +44,78 @@
       });
     
 
-    function dialogCtrl($mdDialog, noticia) {
-      var vm = this;
-      vm.texto = 'funciona';
-      vm.noticia = noticia;
-      vm.color = '';
+      function dialogCtrl($mdDialog, noticia) {
+        var vm = this;
+        vm.noticia = noticia;
+        vm.color = '';
 
-      switch (vm.noticia.categoria.descripcion) {
-        case 'fútbol':
-          vm.color = 'red';
-          break;
-        case 'básquetbol':
-          vm.color = 'orange';
-          break;
-        case 'voleibol':
-          vm.color = 'lightblue';
-          break;
-        case 'tenis':
-          vm.color = 'green';
-          break;
-        case 'automovilismo':
-          vm.color = 'gray';
-          break;
+        switch (vm.noticia.categoria.descripcion) {
+          case 'fútbol':
+            vm.color = 'red';
+            break;
+          case 'básquetbol':
+            vm.color = 'orange';
+            break;
+          case 'voleibol':
+            vm.color = 'lightblue';
+            break;
+          case 'tenis':
+            vm.color = 'green';
+            break;
+          case 'automovilismo':
+            vm.color = 'gray';
+            break;
+        }
+
+        vm.cancel = function() {
+          $mdDialog.cancel();
+        };
       }
+    };
 
-      vm.hide = function() {
-        $mdDialog.hide();
-      };
+    vm.agregarNoticia = function ($event) {
+      $mdDialog.show({
+        templateUrl: 'app/components/form-noticia/form-noticia.html',
+        controller: dialogCtrl,
+        controllerAs: 'vm',
+        parent: angular.element(document.body),
+        targetEvent: $event,
+        clickOutsideToClose:true,
+        locals: {
+          NoticiasService: NoticiasService,
+        },
+        fullscreen: vm.customFullscreen // Only for -xs, -sm breakpoints.
+      })
+      .then(function(answer) {
+        vm.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        vm.status = 'You cancelled the dialog.';
+      });
+    
 
-      vm.cancel = function() {
-        $mdDialog.cancel();
-      };
+      function dialogCtrl($mdDialog, NoticiasService) {
+        var vm = this;
+        /**vm.noticia = {
+          titular: '',
+          entrada: '',
+          cuerpo: '',
+          imagen: '',
+          fecha: '',
+          categoria: 0,
+          usuario: 0,
+        };*/
 
-      vm.answer = function(answer) {
-        $mdDialog.hide(answer);
-      };
-    }
-};
+        vm.agregar = function (noticia) {
+          //var fechaReal = noticia.fecha.getFullYear() + '-' + (noticia.fecha.getMonth() + 1) + '-' + noticia.fecha.getDay();
+          //console.log('Fecha real: ' + fechaReal);
+          //noticia.fecha = '2017-11-29';
+          NoticiasService.save(noticia);
+        }
+
+        vm.cancel = function() {
+          $mdDialog.cancel();
+        };
+      }
+    } 
   }
 })();

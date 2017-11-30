@@ -25,8 +25,11 @@
     </md-card-content>
 
     <md-card-actions layout="row" layout-align="start center">
-      <md-button class="md-raised" ng-click="vm.leer($event, noticia)">Leer noticia</md-button>
+      <md-button class="md-raised" ng-click="vm.leer($event, noticia)" ui-sref="noticias({id: noticia.id})">Leer noticia</md-button>
     </md-card-actions>
   </md-card>
-
 </div>
+
+<md-button class="md-fab" aria-label="Eat cake" style="float: right; margin: 3em" ng-click="vm.agregarNoticia($event)">
+  <md-icon md-svg-src="img/icons/cake.svg"></md-icon>
+</md-button>
